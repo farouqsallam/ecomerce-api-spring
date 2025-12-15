@@ -1,0 +1,31 @@
+services:
+  # 1. The Database
+  postgresdb:
+    image: postgres:15-alpine
+    container_name: ecomerce-postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: ecommerce_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  # 2. The Application
+  app:
+    build: .
+    container_name: ecomerce-app
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgresdb
+    environment:
+      # Connect to the 'postgresdb' container internally
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgresdb:5432/ecommerce_db
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: admin
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+
+volumes:
+  postgres_data:
