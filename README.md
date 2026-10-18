@@ -4,7 +4,7 @@ You only need Docker installed.
 
 1.  **Clone the repo:**
     ```bash
-    git clone [https://github.com/YOUR_USERNAME/roka-ecommerce.git](https://github.com/YOUR_USERNAME/roka-ecommerce.git)
+    git clone https://github.com/farouqsallam/roka-ecommerce.git
     cd roka-ecommerce
     ```
 
